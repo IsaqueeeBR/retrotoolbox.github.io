@@ -72,7 +72,6 @@ def load_file(path):
         return 0
 
     mapping = map_columns(rows[header_idx])
-    source_label = path.stem.replace("_", " ").replace("-", " ").strip().title()
 
     count = 0
     for row in rows[header_idx + 1:]:
@@ -99,7 +98,6 @@ def load_file(path):
             "description": clean_desc(desc_raw) if desc_raw else None,
             "category": category if category else None,
             "featured": "\u2730" in desc_raw,
-            "source": source_label,
             "date": get(row, mapping, "date") or None,
         })
         count += 1

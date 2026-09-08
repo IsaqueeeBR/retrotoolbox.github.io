@@ -3,47 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROBLOX Catalog - 2011 Vintage Edition</title>
+    <title>Retro Toolbox</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Arial:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #0b2246;
-            background-image: linear-gradient(to bottom, #113166 0%, #0b2246 300px, #0b2246 100%);
+            background-image: linear-gradient(
+                to bottom,
+                #113166 0%,
+                #0b2246 300px,
+                #0b2246 100%
+            );
             margin: 0;
             padding: 0;
             color: #000;
         }
+
         .retro-header-bg {
-            background: linear-gradient(to bottom, #1c529b 0%, #103366 100%);
+            background: linear-gradient(
+                to bottom,
+                #1c529b 0%,
+                #103366 100%
+            );
             border-bottom: 2px solid #082040;
         }
+
         .retro-nav-bar {
-            background: linear-gradient(to bottom, #164380 0%, #0d2a54 100%);
+            background: linear-gradient(
+                to bottom,
+                #164380 0%,
+                #0d2a54 100%
+            );
             box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
         }
+
         .retro-main-box {
             background-color: #FFFFFF;
             border: 1px solid #729ac2;
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
+
         .retro-sidebar-header {
-            background: linear-gradient(to bottom, #e2ebf5 0%, #c4d7ec 100%);
+            background: linear-gradient(
+                to bottom,
+                #e2ebf5 0%,
+                #c4d7ec 100%
+            );
             border-bottom: 1px solid #9abcdc;
         }
+
         .item-card {
             border: 1px solid #c0d1e5;
             background: #ffffff;
             transition: all 0.1s ease;
         }
+
         .item-card:hover {
             border-color: #3b73b9;
             box-shadow: 0 0 6px rgba(59,115,185,0.3);
         }
-        .badge-limited {
-            background: linear-gradient(to bottom, #2ebd59 0%, #1f8c41 100%);
+
+        .badge-recent {
+            background: linear-gradient(
+                to bottom,
+                #9da7b3 0%,
+                #68727e 100%
+            );
             color: white;
             font-size: 9px;
             font-weight: bold;
@@ -52,8 +81,13 @@
             display: inline-block;
             text-shadow: 0 1px 0 rgba(0,0,0,0.3);
         }
+
         .badge-bc {
-            background: linear-gradient(to bottom, #ffd700 0%, #cc9900 100%);
+            background: linear-gradient(
+                to bottom,
+                #ffd700 0%,
+                #cc9900 100%
+            );
             color: #000;
             font-size: 9px;
             font-weight: bold;
@@ -61,30 +95,44 @@
             border-radius: 2px;
             display: inline-block;
         }
+
         .retro-btn {
-            background: linear-gradient(to bottom, #5bb4ef 0%, #1072d4 100%);
+            background: linear-gradient(
+                to bottom,
+                #5bb4ef 0%,
+                #1072d4 100%
+            );
             border: 1px solid #0d5aa7;
             color: white;
             font-weight: bold;
             text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
         }
+
         .retro-btn:hover {
-            background: linear-gradient(to bottom, #6bc4ff 0%, #1b81e6 100%);
+            background: linear-gradient(
+                to bottom,
+                #6bc4ff 0%,
+                #1b81e6 100%
+            );
         }
+
         .retro-input {
             border: 1px solid #6b8fb9;
             box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
         }
     </style>
 </head>
+
 <body class="min-h-screen flex flex-col justify-between">
 
     <header class="w-full">
         <div class="retro-header-bg py-3 px-6 flex flex-col md:flex-row items-center justify-between shadow-md">
-
             <div class="flex items-center space-x-6 my-2 md:my-0">
                 <div class="text-center relative">
-                    <h1 class="text-4xl md:text-5xl font-black italic tracking-tighter text-white drop-shadow-[0_4px_3px_rgba(0,0,0,0.8)]" style="font-family: Arial Black, sans-serif;">
+                    <h1
+                        class="text-4xl md:text-5xl font-black italic tracking-tighter text-white drop-shadow-[0_4px_3px_rgba(0,0,0,0.8)]"
+                        style="font-family: Arial Black, Arial, sans-serif;"
+                    >
                         Retro Toolbar
                     </h1>
                 </div>
@@ -94,68 +142,142 @@
 
     <main class="flex-grow max-w-7xl mx-auto w-full px-4 py-4">
         <div class="retro-main-box p-4 rounded">
+
             <div class="flex flex-col md:flex-row items-center justify-between border-b border-[#a3c2e0] pb-3 mb-4 gap-3">
                 <div class="flex items-center space-x-2">
-                    <span class="text-xl font-bold text-[#103366]">Catalog</span>
+                    <span class="text-xl font-bold text-[#103366]">
+                        Models
+                    </span>
                 </div>
+
                 <div class="flex items-center w-full md:w-auto space-x-2">
-                    <input type="text" id="searchInput" placeholder="Search the catalog by ID, creator or keyword..." class="retro-input px-3 py-1 rounded text-sm w-full md:w-80 bg-white outline-none" autocomplete="off">
-                    <button class="retro-btn px-4 py-1 rounded text-xs cursor-pointer">Search</button>
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search models by ID, creator or keyword..."
+                        class="retro-input px-3 py-1 rounded text-sm w-full md:w-80 bg-white outline-none"
+                        autocomplete="off"
+                    >
+
+                    <button
+                        id="searchButton"
+                        class="retro-btn px-4 py-1 rounded text-xs cursor-pointer"
+                        type="button"
+                    >
+                        Search
+                    </button>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <!-- Sidebar -->
+
                 <div class="md:col-span-1 space-y-4">
+
                     <div class="border border-[#729ac2] rounded bg-[#eaf2fb]">
                         <div class="retro-sidebar-header px-3 py-1.5 font-bold text-xs text-[#0d2a54]">
                             Browse Categories
                         </div>
-                        <div class="p-2 space-y-1 text-xs chip-list flex flex-col" id="categoryChips">
-                        </div>
+
+                        <div
+                            class="p-2 space-y-1 text-xs chip-list flex flex-col"
+                            id="categoryChips"
+                        ></div>
                     </div>
 
                     <div class="border border-[#729ac2] rounded bg-[#eaf2fb] p-3 text-xs space-y-3">
-                        <div class="font-bold text-[#0d2a54] uppercase tracking-wide border-b border-[#a3c2e0] pb-1">Refine Search</div>
+                        <div class="font-bold text-[#0d2a54] uppercase tracking-wide border-b border-[#a3c2e0] pb-1">
+                            Refine Search
+                        </div>
+
                         <label class="toggle-row flex items-center gap-2 cursor-pointer">
-                            <input type="checkbox" id="featuredOnly" class="rounded">
-                            <span class="font-bold text-gray-800">Limited items only</span>
+                            <input
+                                type="checkbox"
+                                id="featuredOnly"
+                                class="rounded"
+                            >
+
+                            <span class="font-bold text-gray-800">
+                                Recent models only
+                            </span>
                         </label>
                     </div>
 
-                    <div class="border border-[#729ac2] rounded bg-[#eaf2fb] p-3 text-[11px] leading-relaxed text-gray-800">
-                        <div class="font-bold text-[#0d2a54] mb-2 uppercase tracking-wide border-b border-[#a3c2e0] pb-1">Legend</div>
-                        <div class="mb-2">
-                            <p class="font-bold"><span class="badge-bc">BC</span> Builders Club Only</p>
-                            <p class="text-gray-600 text-[10px]">Items which can only be purchased by users with a Builders Club membership.</p>
-                        </div>
-                        <div class="mb-2">
-                            <p class="font-bold"><span class="badge-limited">LIMITED</span> Limited Items</p>
-                            <p class="text-gray-600 text-[10px]">Items which were once sold by Roblox and will not be sold again. Resellable by users.</p>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="md:col-span-3">
+
                     <div class="bg-[#f0f5fc] border border-[#a3c2e0] p-3 rounded mb-4 flex items-center justify-between">
-                        <h2 class="text-base font-bold text-[#103366]" id="currentCategoryTitle">Featured Items</h2>
+                        <h2
+                            class="text-base font-bold text-[#103366]"
+                            id="currentCategoryTitle"
+                        >
+                            Recent Models
+                        </h2>
+
+                        <span
+                            id="visibleCount"
+                            class="text-xs text-gray-500"
+                        ></span>
                     </div>
 
-                    <div id="grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-                    </div>
-                    <p class="empty-state text-center text-gray-500 py-12 text-sm font-bold" id="emptyState" hidden>No items matched your search. Try browsing a different category.</p>
-                    <div id="sentinel" class="sentinel py-4" aria-hidden="true"></div>
+                    <div
+                        id="grid"
+                        class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3"
+                    ></div>
+
+                    <p
+                        class="empty-state text-center text-gray-500 py-12 text-sm font-bold"
+                        id="emptyState"
+                        hidden
+                    >
+                        No models matched your search.
+                        Try browsing a different category.
+                    </p>
+
+                    <div
+                        id="sentinel"
+                        class="sentinel py-4"
+                        aria-hidden="true"
+                    ></div>
+
                 </div>
+
             </div>
 
             <div class="mt-6 border-t border-[#a3c2e0] pt-4 text-xs text-gray-600 leading-normal">
-                <span class="font-bold text-gray-800">How to insert a model -</span> Open a place in Roblox Studio. On the top bar, click Insert, then select Import Model. Paste the model ID into the field and import it.<br>
-				<span class="font-bold text-gray-800">How to export a model -</span> Open a place in Roblox Studio and select the model you want to export. On the top bar, click Insert, then select Export Model. Wait for the export process to finish. Once the ID appears, that is your model ID.
+
+                <span class="font-bold text-gray-800">
+                    How to insert a model -
+                </span>
+
+                Open a place in Roblox Studio. On the top bar, click Insert,
+                then select Import Model. Paste the model ID into the field
+                and import it.
+
+                <br>
+
+                <span class="font-bold text-gray-800">
+                    How to export a model -
+                </span>
+
+                Open a place in Roblox Studio and select the model you want
+                to export. On the top bar, click Insert, then select Export
+                Model. Wait for the export process to finish. Once the ID
+                appears, that is your model ID.
+
             </div>
+
         </div>
     </main>
 
-    <div class="toast fixed bottom-6 left-1/2 -translate-x-1/2 bg-[#0a2647] text-white border border-[#1478c9] px-4 py-2 rounded font-bold text-xs opacity-0 pointer-events-none transition-all z-50 shadow-xl" id="toast" role="status" aria-live="polite"></div>
+    <div
+        class="toast fixed bottom-6 left-1/2 -translate-x-1/2 bg-[#0a2647] text-white border border-[#1478c9] px-4 py-2 rounded font-bold text-xs opacity-0 pointer-events-none transition-all z-50 shadow-xl"
+        id="toast"
+        role="status"
+        aria-live="polite"
+    ></div>
+
     <script src="script.js"></script>
+
 </body>
 </html>
