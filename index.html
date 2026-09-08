@@ -42,7 +42,7 @@
         }
 
         .retro-main-box {
-            background-color: #FFFFFF;
+            background-color: #fff;
             border: 1px solid #729ac2;
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
@@ -54,46 +54,6 @@
                 #c4d7ec 100%
             );
             border-bottom: 1px solid #9abcdc;
-        }
-
-        .item-card {
-            border: 1px solid #c0d1e5;
-            background: #ffffff;
-            transition: all 0.1s ease;
-        }
-
-        .item-card:hover {
-            border-color: #3b73b9;
-            box-shadow: 0 0 6px rgba(59,115,185,0.3);
-        }
-
-        .badge-recent {
-            background: linear-gradient(
-                to bottom,
-                #9da7b3 0%,
-                #68727e 100%
-            );
-            color: white;
-            font-size: 9px;
-            font-weight: bold;
-            padding: 1px 4px;
-            border-radius: 2px;
-            display: inline-block;
-            text-shadow: 0 1px 0 rgba(0,0,0,0.3);
-        }
-
-        .badge-bc {
-            background: linear-gradient(
-                to bottom,
-                #ffd700 0%,
-                #cc9900 100%
-            );
-            color: #000;
-            font-size: 9px;
-            font-weight: bold;
-            padding: 1px 4px;
-            border-radius: 2px;
-            display: inline-block;
         }
 
         .retro-btn {
@@ -120,6 +80,124 @@
             border: 1px solid #6b8fb9;
             box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
         }
+
+        .badge-recent {
+            background: linear-gradient(
+                to bottom,
+                #9da7b3 0%,
+                #68727e 100%
+            );
+            color: white;
+            font-size: 9px;
+            font-weight: bold;
+            padding: 1px 4px;
+            border-radius: 2px;
+            display: inline-block;
+            text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+            flex-shrink: 0;
+        }
+
+        .model-list {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .model-row {
+            display: grid;
+            grid-template-columns: 1fr 150px 105px;
+            align-items: center;
+            min-height: 52px;
+            background: #fff;
+            border: 1px solid #c0d1e5;
+            border-radius: 2px;
+            cursor: pointer;
+            transition:
+                background .1s ease,
+                border-color .1s ease,
+                box-shadow .1s ease;
+        }
+
+        .model-row:hover {
+            background: #f1f6fc;
+            border-color: #3b73b9;
+            box-shadow: 0 0 5px rgba(59,115,185,.25);
+        }
+
+        .model-row.copied {
+            border-color: #2f9e44;
+            box-shadow: 0 0 0 1px #2f9e44;
+        }
+
+        .model-main {
+            min-width: 0;
+            padding: 6px 10px;
+        }
+
+        .model-title {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            min-width: 0;
+        }
+
+        .model-description {
+            color: #0055a5;
+            font-size: 12px;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .model-creator {
+            margin-top: 2px;
+            color: #777;
+            font-size: 10px;
+        }
+
+        .model-category {
+            color: #666;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 4px 8px;
+            border-left: 1px solid #dfe5eb;
+            border-right: 1px solid #dfe5eb;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .model-id {
+            color: #999;
+            font-family: Consolas, Monaco, monospace;
+            font-size: 10px;
+            padding: 0 10px;
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        .empty-state {
+            color: #6e6e6e;
+        }
+
+        .sentinel {
+            min-height: 1px;
+        }
+
+        @media(max-width:650px) {
+            .model-row {
+                grid-template-columns: 1fr auto;
+            }
+
+            .model-category {
+                display: none;
+            }
+
+            .model-id {
+                padding-right: 8px;
+            }
+        }
     </style>
 </head>
 
@@ -144,6 +222,7 @@
         <div class="retro-main-box p-4 rounded">
 
             <div class="flex flex-col md:flex-row items-center justify-between border-b border-[#a3c2e0] pb-3 mb-4 gap-3">
+
                 <div class="flex items-center space-x-2">
                     <span class="text-xl font-bold text-[#103366]">
                         Models
@@ -151,6 +230,7 @@
                 </div>
 
                 <div class="flex items-center w-full md:w-auto space-x-2">
+
                     <input
                         type="text"
                         id="searchInput"
@@ -166,7 +246,9 @@
                     >
                         Search
                     </button>
+
                 </div>
+
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -174,6 +256,7 @@
                 <div class="md:col-span-1 space-y-4">
 
                     <div class="border border-[#729ac2] rounded bg-[#eaf2fb]">
+
                         <div class="retro-sidebar-header px-3 py-1.5 font-bold text-xs text-[#0d2a54]">
                             Browse Categories
                         </div>
@@ -182,14 +265,17 @@
                             class="p-2 space-y-1 text-xs chip-list flex flex-col"
                             id="categoryChips"
                         ></div>
+
                     </div>
 
                     <div class="border border-[#729ac2] rounded bg-[#eaf2fb] p-3 text-xs space-y-3">
+
                         <div class="font-bold text-[#0d2a54] uppercase tracking-wide border-b border-[#a3c2e0] pb-1">
                             Refine Search
                         </div>
 
                         <label class="toggle-row flex items-center gap-2 cursor-pointer">
+
                             <input
                                 type="checkbox"
                                 id="featuredOnly"
@@ -199,7 +285,9 @@
                             <span class="font-bold text-gray-800">
                                 Recent models only
                             </span>
+
                         </label>
+
                     </div>
 
                 </div>
@@ -207,6 +295,7 @@
                 <div class="md:col-span-3">
 
                     <div class="bg-[#f0f5fc] border border-[#a3c2e0] p-3 rounded mb-4 flex items-center justify-between">
+
                         <h2
                             class="text-base font-bold text-[#103366]"
                             id="currentCategoryTitle"
@@ -218,11 +307,12 @@
                             id="visibleCount"
                             class="text-xs text-gray-500"
                         ></span>
+
                     </div>
 
                     <div
                         id="grid"
-                        class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3"
+                        class="model-list"
                     ></div>
 
                     <p
@@ -250,7 +340,7 @@
                     How to insert a model -
                 </span>
 
-                Open a place in Roblox Studio. On the top bar, click Insert,
+                Open a place in RetroStudio. On the top bar, click Insert,
                 then select Import Model. Paste the model ID into the field
                 and import it.
 
@@ -260,7 +350,7 @@
                     How to export a model -
                 </span>
 
-                Open a place in Roblox Studio and select the model you want
+                Open a place in RetroStudio and select the model you want
                 to export. On the top bar, click Insert, then select Export
                 Model. Wait for the export process to finish. Once the ID
                 appears, that is your model ID.
