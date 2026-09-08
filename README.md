@@ -1,8 +1,8 @@
-# Retro Shelf
+# Retro Toolbox
 
 A small static website for browsing old free models from RetroStudio (Roblox).
 
-Retro Shelf collects model IDs from old lists shared through Retro Dev and the **Free Models Masterlist**, making it easier to search for a model and copy its ID.
+Retro Toolbox collects model IDs from old lists shared through Retro Dev and the **Free Models Masterlist**, making it easier to search for a model and copy its ID.
 
 There is no backend, database, or marketplace involved. Everything runs directly in the browser.
 
