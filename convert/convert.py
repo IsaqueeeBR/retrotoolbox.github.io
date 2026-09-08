@@ -62,61 +62,74 @@ def get(row, mapping, field):
 
 
 def load_file(path):
-    raw = path.read_text(encoding="utf-8", errors="replace")
-    delimiter = sniff_delimiter(raw[:4000])
-    rows = list(csv.reader(raw.splitlines(), delimiter=delimiter))
+    raw=path.read_text(encoding="utf-8",errors="replace")
+    delimiter=sniff_delimiter(raw[:4000])
+    rows=list(csv.reader(raw.splitlines(),delimiter=delimiter))
 
-    header_idx = find_header(rows)
+    header_idx=find_header(rows)
+
     if header_idx is None:
         warnings.append(f"[{path.name}] nenhuma coluna de ID encontrada, arquivo ignorado")
         return 0
 
-    mapping = map_columns(rows[header_idx])
+    mapping=map_columns(rows[header_idx])
 
-    count = 0
-    for row in rows[header_idx + 1:]:
+    count=0
+
+    for row in rows[header_idx+1:]:
         if not any(c.strip() for c in row):
             continue
 
-        model_id = get(row, mapping, "id")
+        model_id=get(row,mapping,"id")
+
         if not model_id:
-            creator = get(row, mapping, "creator")
-            desc = get(row, mapping, "description")
-            warnings.append(f"[{path.name}] linha sem ID ignorada -> creator={creator!r} desc={desc!r}")
+            creator=get(row,mapping,"creator")
+            desc=get(row,mapping,"description")
+            warnings.append(
+                f"[{path.name}] linha sem ID ignorada -> creator={creator!r} desc={desc!r}"
+            )
             continue
 
-        creator_raw = get(row, mapping, "creator")
-        creator = re.sub(r"#\d{2,6}$", "", creator_raw).strip()
+        creator_raw=get(row,mapping,"creator")
+        creator=re.sub(r"#\d{2,6}$","",creator_raw).strip()
 
-        desc_raw = get(row, mapping, "description")
-        category_raw = get(row, mapping, "category")
-        category = CATEGORY_ALIASES.get(category_raw.lower(), category_raw) if category_raw else ""
+        desc_raw=get(row,mapping,"description")
+        category_raw=get(row,mapping,"category")
+
+        category=(
+            CATEGORY_ALIASES.get(category_raw.lower(),category_raw)
+            if category_raw else ""
+        )
 
         models.append({
-            "id": model_id,
-            "creator": creator if creator else None,
-            "description": clean_desc(desc_raw) if desc_raw else None,
-            "category": category if category else None,
-            "featured": "\u2730" in desc_raw,
-            "date": get(row, mapping, "date") or None,
+            "id":model_id,
+            "creator":creator if creator else None,
+            "description":clean_desc(desc_raw) if desc_raw else None,
+            "category":category if category else None,
+            "recent":"\u2730" in desc_raw,
+            "date":get(row,mapping,"date") or None,
         })
-        count += 1
+
+        count+=1
 
     return count
 
-
 def score(mod):
-    s = 0
-    if mod["category"]:
-        s += 2
-    if mod["description"]:
-        s += 1
-    if mod["creator"]:
-        s += 1
-    if mod["featured"]:
-        s += 1
-    return s
+    s=0
 
+    if mod["category"]:
+        s+=2
+
+    if mod["description"]:
+        s+=1
+
+    if mod["creator"]:
+        s+=1
+
+    if mod["recent"]:
+        s+=1
+
+    return s
 
 files = sorted(set(SCRIPT_DIR.glob("*.txt")) | set(SCRIPT_DIR.glob("*.csv")))
 

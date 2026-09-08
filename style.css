@@ -439,3 +439,57 @@ a{color:inherit;}
   .search-wrap{order:3;max-width:none;flex-basis:100%;}
   .grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr));}
 }
+.parallax-bg{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:-1;
+}
+
+.parallax-layer{
+    position:absolute;
+    inset:0;
+    width:200%;
+    background-repeat:repeat-x;
+    background-position:0 bottom;
+    background-size:auto 100%;
+    will-change:transform;
+}
+
+.layer-background{
+    background-image:url("assets/background/background.png");
+    animation:parallax-background 90s linear infinite;
+}
+
+.layer-middle{
+    background-image:url("assets/background/objects.png");
+    animation:parallax-middle 40s linear infinite;
+}
+
+.layer-front{
+    background-image:url("assets/background/objects.png");
+    animation:parallax-front 18s linear infinite;
+}
+
+@keyframes parallax-background{
+    from{transform:translateX(0)}
+    to{transform:translateX(-50%)}
+}
+
+@keyframes parallax-middle{
+    from{transform:translateX(0)}
+    to{transform:translateX(-50%)}
+}
+
+@keyframes parallax-front{
+    from{transform:translateX(0)}
+    to{transform:translateX(-50%)}
+}
+
+header,
+main,
+.toast{
+    position:relative;
+    z-index:1;
+}
