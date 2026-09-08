@@ -25,7 +25,6 @@ clickSound.preload = "auto";
 
 const RECENT_DAYS = 30;
 
-// Substitua o seu bloco de clique por este:
 document.addEventListener("click", (event) => {
     const target = event.target.closest(
         "button, input, textarea, select, a, label, .model-row, .chip, .page-button"
@@ -33,10 +32,7 @@ document.addEventListener("click", (event) => {
 
     if (!target) return;
 
-    // 1. Voltamos o áudio global (clickSound) para o início (corrige cliques rápidos)
     clickSound.currentTime = 0;
-
-    // 2. Tocamos a instância global reaproveitável que já está pré-carregada
     clickSound.play().catch(error => {
         console.error("Erro ao tocar click.ogg:", error);
     });

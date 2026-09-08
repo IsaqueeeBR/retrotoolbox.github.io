@@ -1,49 +1,82 @@
 # Retro Shelf
-retrotoolbox.github.io — Toolbox for RetroStudio
 
-Site estático (sem backend) pra vasculhar as listas antigas de modelos free do
-RetroStudio (Roblox) que rolaram no Discord Retro Dev e na planilha
-"Free Models Masterlist". Não vende nada — é só uma "vitrine" pra achar o ID
-do modelo que você quer e copiar com um clique.
+A small static website for browsing old free models from RetroStudio (Roblox).
 
-## Estrutura
+Retro Shelf collects model IDs from old lists shared through Retro Dev and the **Free Models Masterlist**, making it easier to search for a model and copy its ID.
 
+There is no backend, database, or marketplace involved. Everything runs directly in the browser.
+
+## Files
+
+```text
+index.html          Main page
+style.css           Site styling
+script.js           Search, filters, pagination, and copy functions
+data/models.json    Model data used by the site
+convert.py          Converts the original CSV files into models.json
 ```
-index.html      estrutura da página
-style.css       visual (tema "catálogo retro")
-script.js       carrega o JSON, filtra/busca, copia ID ao clicar
-data/models.json  dados já traduzidos, é isso que o site lê
-convert.py      script que gerou o models.json a partir dos CSVs originais
+
+## Running the site
+
+No build process is required.
+
+You can open the files locally or host the project using GitHub Pages.
+
+### GitHub Pages
+
+1. Create a repository and upload the project files.
+2. Go to **Settings → Pages**.
+3. Select the `main` branch and the root folder (`/`).
+4. Save the settings.
+
+The site should then be available at:
+
+```text
+https://YOUR_USERNAME.github.io/YOUR_REPOSITORY/
 ```
 
-## Como publicar no GitHub Pages
+## Updating the model list
 
-1. Cria um repositório novo e sobe estes arquivos (mantendo a pasta `data/`).
-2. Em Settings → Pages, escolhe a branch `main` e a pasta raiz (`/`).
-3. Pronto, o site fica em `https://SEU_USUARIO.github.io/SEU_REPO/`.
+If you get newer CSV files:
 
-Não precisa de nenhuma etapa de build — é só HTML/CSS/JS puro.
+1. Put the CSV files in the same folder as `convert.py`.
+2. Change the file paths at the top of `convert.py` if needed.
+3. Run:
 
-## Como atualizar a lista de modelos
+```bash
+python convert.py
+```
 
-Se você tiver uma versão nova dos CSVs (masterlist ou export do Discord):
+4. The new data will be written to:
 
-1. Coloca os dois CSVs na mesma pasta do `convert.py` (ajusta os caminhos no
-   topo do arquivo se os nomes forem diferentes).
-2. Roda `python3 convert.py`.
-3. Isso regenera `data/models.json`. Só subir esse arquivo de novo pro
-   GitHub.
+```text
+data/models.json
+```
 
-O script:
-- Ignora linhas sem ID e avisa quantas ignorou no terminal.
-- Detecta a categoria quando o arquivo de origem tem essa coluna (caso da
-  masterlist). O export do Discord não tem categoria, então esses entram
-  como "Sem categoria" no site.
-- Marca como "destaque" (★) as descrições que tinham o símbolo ✰ na
-  masterlist original.
-- Tira a tag numérica do Discord (`nome#1234` → `nome`).
+Upload the updated JSON to GitHub and the site will use it automatically.
 
-O `script.js` também tem uma checagem extra: se por algum motivo um item sem
-ID acabar entrando no `models.json`, ele é escondido da lista e aparece um
-aviso no console do navegador — então mesmo editando o JSON à mão isso fica
-protegido.
+### What `convert.py` does
+
+* Removes entries without a model ID.
+* Keeps track of how many invalid entries were skipped.
+* Reads categories from the masterlist when available.
+* Models without a category are shown as **Uncategorized**.
+* Keeps the original `dateAdded` for models that were already in the previous JSON.
+* Gives newly added models the current date.
+* Removes Discord discriminator tags such as `username#1234`.
+* Removes duplicate model IDs.
+
+## Model list
+
+The website supports:
+
+* Searching by ID, creator, description, or category.
+* Browsing models by category.
+* Filtering recently added models.
+* Pagination.
+* Clicking a model to copy its ID.
+* `Ctrl + Click` to copy the model's full information.
+
+## License
+
+This project is mainly intended as a simple archive/browser for the model lists and their IDs.
