@@ -80,59 +80,20 @@
 <body class="min-h-screen flex flex-col justify-between">
 
     <header class="w-full">
-        <!-- Top tiny login bar -->
-        <div class="w-full bg-[#0a1a36] text-right px-4 py-1 text-xs text-gray-300">
-            <span onclick="showToast('Login simulation active')" class="inline-block bg-gradient-to-b from-[#e6f2ff] to-[#b0d0ff] text-black font-bold px-2 py-0.5 rounded border border-[#6b93c4] cursor-pointer hover:bg-white">Login</span>
-        </div>
-
-        <!-- Main Banner Header -->
         <div class="retro-header-bg py-3 px-6 flex flex-col md:flex-row items-center justify-between shadow-md">
-            <!-- Left Header Links -->
-            <div class="flex items-center space-x-4 text-white text-xs font-bold">
-                <a href="#" class="hover:underline">My ROBLOX Games</a>
-                <a href="#" class="hover:underline">Catalog</a>
-                <a href="#" class="hover:underline">Buy ROBLOX Stuff!</a>
-                <a href="#" class="hover:underline">Buy ROBUX!</a>
-            </div>
 
-            <!-- Center Roblox 2011 Logo -->
             <div class="flex items-center space-x-6 my-2 md:my-0">
                 <div class="text-center relative">
                     <h1 class="text-4xl md:text-5xl font-black italic tracking-tighter text-white drop-shadow-[0_4px_3px_rgba(0,0,0,0.8)]" style="font-family: Arial Black, sans-serif;">
-                        <span class="text-red-600">R</span><span class="text-blue-400">O</span><span class="text-yellow-400">B</span><span class="text-green-500">L</span><span class="text-purple-400">O</span><span class="text-orange-500">X</span>
+                        Retro Toolbar
                     </h1>
                 </div>
             </div>
-
-            <!-- Right Header Button -->
-            <div class="flex items-center space-x-4">
-                <button onclick="playNowModal()" class="bg-gradient-to-b from-[#72cc28] to-[#3a8a0b] hover:from-[#82dc38] hover:to-[#469d13] text-white font-bold text-lg px-6 py-2 rounded-lg border border-[#2d6d08] shadow-[0_4px_0_#235406] active:translate-y-1 active:shadow-none transition-all cursor-pointer">
-                    PLAY NOW
-                </button>
-            </div>
         </div>
-
-        <!-- Navigation Bar -->
-        <nav class="retro-nav-bar px-6 py-2 text-white font-bold text-xs flex flex-wrap items-center justify-between">
-            <div class="flex flex-wrap items-center space-x-5">
-                <a href="#" class="hover:text-yellow-300">Catalog</a>
-                <a href="#" class="hover:text-yellow-300">People</a>
-                <a href="#" class="hover:text-yellow-300">Builders Club</a>
-                <a href="#" class="hover:text-yellow-300">Contests</a>
-                <a href="#" class="hover:text-yellow-300">Forum</a>
-                <a href="#" class="hover:text-yellow-300">News</a>
-                <a href="#" class="hover:text-yellow-300">Parents</a>
-                <a href="#" class="hover:text-yellow-300">Help</a>
-            </div>
-            <div class="flex items-center space-x-2 mt-1 md:mt-0">
-                <span class="text-yellow-300 font-normal">Server time: <span id="clock">12:00 PM</span></span>
-            </div>
-        </nav>
     </header>
 
     <main class="flex-grow max-w-7xl mx-auto w-full px-4 py-4">
         <div class="retro-main-box p-4 rounded">
-            <!-- Catalog Title & Search Bar Row -->
             <div class="flex flex-col md:flex-row items-center justify-between border-b border-[#a3c2e0] pb-3 mb-4 gap-3">
                 <div class="flex items-center space-x-2">
                     <span class="text-xl font-bold text-[#103366]">Catalog</span>
@@ -140,42 +101,28 @@
                 <div class="flex items-center w-full md:w-auto space-x-2">
                     <input type="text" id="searchInput" placeholder="Search the catalog by ID, creator or keyword..." class="retro-input px-3 py-1 rounded text-sm w-full md:w-80 bg-white outline-none" autocomplete="off">
                     <button class="retro-btn px-4 py-1 rounded text-xs cursor-pointer">Search</button>
-                    <div class="item-count font-bold text-xs text-gray-700 ml-2" id="itemCount">loading...</div>
                 </div>
             </div>
 
-            <!-- Main Layout Grid: Sidebar + Content Area -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
                 <!-- Sidebar -->
                 <div class="md:col-span-1 space-y-4">
-                    <!-- Browse Categories Panel -->
                     <div class="border border-[#729ac2] rounded bg-[#eaf2fb]">
                         <div class="retro-sidebar-header px-3 py-1.5 font-bold text-xs text-[#0d2a54]">
                             Browse Categories
                         </div>
                         <div class="p-2 space-y-1 text-xs chip-list flex flex-col" id="categoryChips">
-                            <!-- Categorias injetadas pelo script.js -->
                         </div>
                     </div>
 
-                    <!-- Refine Search Panel -->
                     <div class="border border-[#729ac2] rounded bg-[#eaf2fb] p-3 text-xs space-y-3">
                         <div class="font-bold text-[#0d2a54] uppercase tracking-wide border-b border-[#a3c2e0] pb-1">Refine Search</div>
                         <label class="toggle-row flex items-center gap-2 cursor-pointer">
                             <input type="checkbox" id="featuredOnly" class="rounded">
                             <span class="font-bold text-gray-800">Limited items only</span>
                         </label>
-                        <label class="select-row flex flex-col gap-1 font-bold text-gray-700">
-                            <span>Source</span>
-                            <select id="sourceSelect" title="List source" class="p-1 border border-gray-400 rounded bg-white text-xs">
-                                <option value="all">All sources</option>
-                                <option value="Masterlist">Masterlist</option>
-                                <option value="Discord">Discord #free-models</option>
-                            </select>
-                        </label>
                     </div>
 
-                    <!-- Legend Panel -->
                     <div class="border border-[#729ac2] rounded bg-[#eaf2fb] p-3 text-[11px] leading-relaxed text-gray-800">
                         <div class="font-bold text-[#0d2a54] mb-2 uppercase tracking-wide border-b border-[#a3c2e0] pb-1">Legend</div>
                         <div class="mb-2">
@@ -194,106 +141,21 @@
                         <h2 class="text-base font-bold text-[#103366]" id="currentCategoryTitle">Featured Items</h2>
                     </div>
 
-                    <!-- Item Cards Grid -->
                     <div id="grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-                        <!-- Cards injetadas dinamicamente pelo script.js original -->
                     </div>
                     <p class="empty-state text-center text-gray-500 py-12 text-sm font-bold" id="emptyState" hidden>No items matched your search. Try browsing a different category.</p>
                     <div id="sentinel" class="sentinel py-4" aria-hidden="true"></div>
                 </div>
             </div>
 
-            <!-- Avatar Items Description Footer banner inside main box -->
             <div class="mt-6 border-t border-[#a3c2e0] pt-4 text-xs text-gray-600 leading-normal">
-                <span class="font-bold text-gray-800">Avatar Items -</span> ROBLOX has a full virtual goods catalog with avatar items and other virtual items. Create a free account on ROBLOX and start collecting virtual avatar items, virtual goods, virtual items, and other gear for your virtual avatars.
+                <span class="font-bold text-gray-800">How to insert a model -</span> Open a place in Roblox Studio. On the top bar, click Insert, then select Import Model. Paste the model ID into the field and import it.<br>
+				<span class="font-bold text-gray-800">How to export a model -</span> Open a place in Roblox Studio and select the model you want to export. On the top bar, click Insert, then select Export Model. Wait for the export process to finish. Once the ID appears, that is your model ID.
             </div>
         </div>
     </main>
 
-    <!-- Play Now Modal -->
-    <div id="playModal" class="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50 hidden">
-        <div class="bg-white border-2 border-[#103366] rounded-lg max-w-md w-full p-6 text-center shadow-2xl">
-            <h3 class="text-xl font-bold text-[#103366] mb-3">Welcome to ROBLOX 2011!</h3>
-            <p class="text-xs text-gray-600 mb-4">To play classic Roblox games or test items in RetroStudio, please sign up or log in to your account.</p>
-            <button onclick="closePlayModal()" class="retro-btn px-6 py-2 rounded text-xs font-bold cursor-pointer">Close Window</button>
-        </div>
-    </div>
-
-    <!-- Toast Notification container -->
     <div class="toast fixed bottom-6 left-1/2 -translate-x-1/2 bg-[#0a2647] text-white border border-[#1478c9] px-4 py-2 rounded font-bold text-xs opacity-0 pointer-events-none transition-all z-50 shadow-xl" id="toast" role="status" aria-live="polite"></div>
-
-    <footer class="w-full bg-[#0a1a36] text-gray-400 text-[11px] py-6 px-4 mt-8 border-t border-[#1a3a6b]">
-        <div class="max-w-6xl mx-auto text-center space-y-3">
-            <div class="flex flex-wrap justify-center space-x-4 text-blue-300 font-bold">
-                <a href="#" class="hover:underline">Contact Us</a>
-                <span>|</span>
-                <a href="#" class="hover:underline">About Us</a>
-                <span>|</span>
-                <a href="#" class="hover:underline">Free Games</a>
-                <span>|</span>
-                <a href="#" class="hover:underline">Jobs</a>
-                <span>|</span>
-                <a href="#" class="hover:underline">Privacy Policy</a>
-                <span>|</span>
-                <a href="#" class="hover:underline">Advertise with Us</a>
-            </div>
-
-            <div class="flex flex-wrap justify-center space-x-3 text-[10px] text-gray-400">
-                <a href="#" class="hover:text-white">Town and City</a>
-                <span>·</span>
-                <a href="#" class="hover:text-white">Fantasy</a>
-                <span>·</span>
-                <a href="#" class="hover:text-white">Sci-Fi</a>
-                <span>·</span>
-                <a href="#" class="hover:text-white">Ninja</a>
-                <span>·</span>
-                <a href="#" class="hover:text-white">Scary</a>
-                <span>·</span>
-                <a href="#" class="hover:text-white">Pirate</a>
-                <span>·</span>
-                <a href="#" class="hover:text-white">Adventure</a>
-                <span>·</span>
-                <a href="#" class="hover:text-white">Sports</a>
-                <span>·</span>
-                <a href="#" class="hover:text-white">Funny</a>
-                <span>·</span>
-                <a href="#" class="hover:text-white">Wild West</a>
-                <span>·</span>
-                <a href="#" class="hover:text-white">War</a>
-                <span>·</span>
-                <a href="#" class="hover:text-white">Skate Park</a>
-                <span>·</span>
-                <a href="#" class="hover:text-white">Tutorial</a>
-            </div>
-
-            <p class="text-[10px] text-gray-300 max-w-4xl mx-auto leading-tight">
-                ROBLOX, "Online Building Toy", characters, logos, names, and all related indicia are trademarks of <span class="text-white font-semibold">ROBLOX Corporation</span>, ©2011. Use of this site signifies your acceptance of the <a href="#" class="text-blue-300 underline">Terms and Conditions</a>.
-            </p>
-        </div>
-    </footer>
-
-    <script>
-        // Modal helpers para o botão Play Now
-        function playNowModal() {
-            document.getElementById('playModal').classList.remove('hidden');
-        }
-        function closePlayModal() {
-            document.getElementById('playModal').classList.add('hidden');
-        }
-
-        // Relógio do servidor ao vivo
-        function updateClock() {
-            const now = new Date();
-            let hours = now.getHours();
-            const minutes = now.getMinutes().toString().padStart(2, '0');
-            const ampm = hours >= 12 ? 'PM' : 'AM';
-            hours = hours % 12 || 12;
-            const clockEl = document.getElementById('clock');
-            if (clockEl) clockEl.innerText = `${hours}:${minutes} ${ampm}`;
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-    </script>
     <script src="script.js"></script>
 </body>
 </html>
