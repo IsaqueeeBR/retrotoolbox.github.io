@@ -23,6 +23,9 @@ const clickSound = new Audio("assets/sounds/click.ogg");
 clickSound.volume = 1.0;
 clickSound.preload = "auto";
 
+const RECENT_DAYS = 30;
+
+// Substitua o seu bloco de clique por este:
 document.addEventListener("click", (event) => {
     const target = event.target.closest(
         "button, input, textarea, select, a, label, .model-row, .chip, .page-button"
@@ -30,13 +33,41 @@ document.addEventListener("click", (event) => {
 
     if (!target) return;
 
-    const sound = new Audio("assets/sounds/click.ogg");
-    sound.volume = 1.0;
+    // 1. Voltamos o áudio global (clickSound) para o início (corrige cliques rápidos)
+    clickSound.currentTime = 0;
 
-    sound.play().catch(error => {
+    // 2. Tocamos a instância global reaproveitável que já está pré-carregada
+    clickSound.play().catch(error => {
         console.error("Erro ao tocar click.ogg:", error);
     });
 });
+
+function parseDateAdded(value){
+    if(!value)return null;
+
+    const date=new Date(`${value}T00:00:00`);
+
+    if(Number.isNaN(date.getTime())){
+        return null;
+    }
+
+    return date;
+}
+
+function isRecentModel(model){
+    const addedDate=parseDateAdded(model.dateAdded);
+
+    if(!addedDate){
+        return false;
+    }
+
+    const now=new Date();
+
+    const diffMs=now.getTime()-addedDate.getTime();
+    const diffDays=diffMs/(1000*60*60*24);
+
+    return diffDays>=0 && diffDays<=RECENT_DAYS;
+}
 
 init();
 
@@ -157,9 +188,11 @@ function applyFilters(){
             if(category!==activeCategory)return false;
         }
 
-        const isRecent=model.recent??model.featured??false;
+      const isRecent=isRecentModel(model);
 
-        if(recentOnly&&!isRecent)return false;
+      if(recentOnly&&!isRecent){
+          return false;
+      }
 
         if(searchTerm){
             const text=`
@@ -300,11 +333,13 @@ function updatePagination(){
 
 function buildModelRow(model){
     const item=document.createElement("article");
-
     item.className="model-row";
     item.tabIndex=0;
     item.setAttribute("role","button");
-    item.setAttribute("aria-label",`Copy ID ${model.id}`);
+    item.setAttribute(
+        "aria-label",
+        `Copy ID ${model.id}`
+    );
 
     const main=document.createElement("div");
     main.className="model-main";
@@ -312,44 +347,37 @@ function buildModelRow(model){
     const title=document.createElement("div");
     title.className="model-title";
 
-    const isRecent=model.recent??model.featured??false;
+    const isRecent=isRecentModel(model);
 
     if(isRecent){
         const badge=document.createElement("span");
-
         badge.className="badge-recent";
         badge.textContent="RECENT";
         badge.title="Recently added model";
-
         title.appendChild(badge);
     }
 
     const description=document.createElement("span");
-
     description.className="model-description";
     description.textContent=model.description||"No Description";
-
     title.appendChild(description);
 
     const creator=document.createElement("div");
-
     creator.className="model-creator";
-    creator.textContent=`by ${
-        model.creator&&model.creator.trim()
-            ?model.creator
-            :"Anonymous"
-    }`;
+    creator.textContent=
+        `by ${model.creator&&model.creator.trim()
+            ? model.creator
+            : "Anonymous"}`;
 
     main.appendChild(title);
     main.appendChild(creator);
 
     const category=document.createElement("div");
-
     category.className="model-category";
-    category.textContent=model.category||"Uncategorized";
+    category.textContent=
+        model.category||"Uncategorized";
 
     const id=document.createElement("div");
-
     id.className="model-id";
     id.textContent=`ID: ${model.id}`;
 
@@ -357,25 +385,35 @@ function buildModelRow(model){
     item.appendChild(category);
     item.appendChild(id);
 
-    const activate=()=>{
-        copyId(model.id,item);
-    };
-
-    item.addEventListener("click",activate);
+    item.addEventListener("click",event=>{
+        if(event.ctrlKey){
+            copyModelData(model,item);
+        }else{
+            copyId(model.id,item);
+        }
+    });
 
     item.addEventListener("keydown",event=>{
-        if(event.key==="Enter"||event.key===" "){
+        if(event.key==="Enter"){
             event.preventDefault();
-            activate();
+            copyId(model.id,item);
+        }
+
+        if(event.key===" "){
+            event.preventDefault();
+            copyId(model.id,item);
         }
     });
 
     return item;
 }
 
+
 async function copyId(id,item){
     try{
-        await navigator.clipboard.writeText(String(id));
+        await navigator.clipboard.writeText(
+            String(id)
+        );
     }catch(error){
         const textarea=document.createElement("textarea");
 
@@ -392,6 +430,45 @@ async function copyId(id,item){
     }
 
     showToast(`Copied ID: ${id}`);
+
+    item.classList.add("copied");
+
+    setTimeout(()=>{
+        item.classList.remove("copied");
+    },700);
+}
+
+
+async function copyModelData(model,item){
+    const recent=isRecentModel(model);
+
+    const data=[
+        `Creator: ${model.creator||"Anonymous"}`,
+        `ID: ${model.id}`,
+        `Description: ${model.description||"No Description"}`,
+        `Category: ${model.category||"Uncategorized"}`,
+        `Date Added: ${model.dateAdded||"Unknown"}`,
+        `Recent: ${recent}`
+    ].join("\n");
+
+    try{
+        await navigator.clipboard.writeText(data);
+    }catch(error){
+        const textarea=document.createElement("textarea");
+
+        textarea.value=data;
+        textarea.style.position="fixed";
+        textarea.style.opacity="0";
+
+        document.body.appendChild(textarea);
+
+        textarea.select();
+        document.execCommand("copy");
+
+        textarea.remove();
+    }
+
+    showToast(`Copied data: ${model.id}`);
 
     item.classList.add("copied");
 
